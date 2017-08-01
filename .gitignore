@@ -1,0 +1,3 @@
+Cargo.lock
+rust-a-star/target
+*.swp
