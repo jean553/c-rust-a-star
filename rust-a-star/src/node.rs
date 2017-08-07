@@ -12,6 +12,7 @@ pub const DIMENSION: f64 = 50.0;
 
 pub struct Node {
     surface: Rectangle,
+    wall: bool,
     horizontal_position: f64,
     vertical_position: f64,
 }
@@ -43,6 +44,7 @@ impl Node {
                 shape: Shape::Square,
                 border: None,
             },
+            wall: wall,
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
         }
@@ -71,6 +73,15 @@ impl Node {
             context.transform,
             graphics,
         );
+    }
+
+    /// Switches the selected node from wall to empty and empty to wall
+    pub fn switch(&mut self) {
+
+        self.wall = !self.wall;
+
+        /* FIXME: needs to check why this does not work at all */
+        self.surface.color([1.0, 1.0, 1.0, 0.0]);
     }
 }
 
