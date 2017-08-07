@@ -11,6 +11,9 @@ use piston_window::{
     WindowSettings,
     clear,
     MouseCursorEvent,
+    MouseButton,
+    PressEvent,
+    Button,
 };
 
 use graphics::context::Context;
@@ -59,6 +62,7 @@ fn main() {
                 vertical_position,
             );
 
+
             horizontal_position += DIMENSION;
         }
     }
@@ -83,16 +87,25 @@ fn main() {
 
         if let Some(position) = event.mouse_cursor_args() {
 
-            let mut horizontal_position: f64 = 0.0;
+            index = 0;
+
+            let mut horizontal_position: f64 = 50.0;
             while horizontal_position < position[0] {
                 horizontal_position += DIMENSION;
                 index += 1;
             }
 
-            let mut vertical_position: f64 = 0.0;
+            let mut vertical_position: f64 = 50.0;
             while vertical_position < position[1] {
                 vertical_position += DIMENSION;
                 index += 5;
+            }
+        }
+
+        if let Some(button) = event.press_args() {
+
+            if button == Button::Mouse(MouseButton::Left) {
+                nodes[index].switch();
             }
         }
     }
