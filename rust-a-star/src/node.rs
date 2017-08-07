@@ -1,10 +1,13 @@
 //! The module that handles the nodes.
 
-use piston_window::Rectangle;
+use piston_window::{
+    Rectangle,
+    G2d,
+};
 
-use graphics::rectangle;
+use graphics::rectangle::Shape;
+use graphics::context::Context;
 
-/* TODO: some fields are unused */
 pub struct Node {
     surface: Rectangle,
     horizontal_position: f64,
@@ -35,11 +38,39 @@ impl Node {
         Node {
             surface: Rectangle {
                 color: color,
-                shape: rectangle::Shape::Square,
+                shape: Shape::Square,
                 border: None,
             },
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
         }
     }
+
+    /// Displays the node.
+    ///
+    /// # Arguments:
+    ///
+    /// * `context` - the context of the piston window
+    /// * `graphics` - 2D graphics from the piston window
+    pub fn display(
+        &self,
+        context: Context,
+        graphics: &mut G2d,
+    ) {
+
+        const WIDTH: f64 = 50.0;
+        const HEIGHT: f64 = 50.0;
+        self.surface.draw(
+            [
+                self.horizontal_position,
+                self.vertical_position,
+                WIDTH,
+                HEIGHT,
+            ],
+            &context.draw_state,
+            context.transform,
+            graphics,
+        );
+    }
 }
+
