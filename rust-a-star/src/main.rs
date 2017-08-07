@@ -41,6 +41,54 @@ fn main() {
     ];
 
     while let Some(event) = window.next() {
-        /* TODO: to define, simply used to maintain the window open */
+
+        window.draw_2d(
+            &event,
+            |context, graphics| {
+
+                display_nodes(
+                    &nodes,
+                    context,
+                    graphics,
+                );
+
+                clear_screen(graphics);
+            }
+        );
     }
+}
+
+/// Displays all nodes.
+///
+/// # Arguments:
+///
+/// * `nodes` - the array of nodes to display
+/// * `context` - graphical context from the piston window
+/// * `graphics` - 2D graphics from the piston window
+fn display_nodes(
+    nodes: &[Node; 1],
+    context: Context,
+    graphics: &mut G2d,
+) {
+
+    for node in nodes {
+        node.display(
+            context,
+            graphics,
+        );
+    }
+}
+
+/// Clear the whole screen.
+///
+/// # Arguments:
+///
+/// * `graphics` - 2D graphics from the piston window
+fn clear_screen(graphics: &mut G2d) {
+
+    const BLACK_COLOR: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
+    clear(
+        BLACK_COLOR,
+        graphics,
+    );
 }
