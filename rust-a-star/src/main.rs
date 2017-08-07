@@ -3,7 +3,7 @@
 extern crate piston_window;
 extern crate graphics;
 
-mod node;
+use std::mem;
 
 use piston_window::{
     G2d,
@@ -14,12 +14,17 @@ use piston_window::{
 
 use graphics::context::Context;
 
-use node::Node;
+mod node;
+
+use node::{
+    DIMENSION,
+    Node,
+};
 
 fn main() {
 
-    const WINDOW_WIDTH: u32 = 600;
-    const WINDOW_HEIGHT: u32 = 400;
+    const WINDOW_WIDTH: u32 = 250;
+    const WINDOW_HEIGHT: u32 = 250;
 
     let mut window: PistonWindow = WindowSettings::new(
         "A* algorithm simulation",
@@ -31,14 +36,31 @@ fn main() {
     .build()
     .unwrap();
 
-    /* TODO: add 25 nodes ( 5 x 5 ) */
-    let nodes = [
-        Node::new(
-            true,
-            0.0,
-            0.0,
-        )
-    ];
+    const NODES_AMOUNT: usize = 25;
+    let mut nodes: [Node; NODES_AMOUNT] = unsafe { mem::uninitialized() };
+
+    {
+        const DEFAULT_POSITION: f64 = 0.0;
+        let mut horizontal_position: f64 = DEFAULT_POSITION;
+        let mut vertical_position: f64 = DEFAULT_POSITION;
+
+        for index in 0..NODES_AMOUNT {
+
+            const NODES_PER_ROW: usize = 5;
+            if index % NODES_PER_ROW == 0 && index != 0 {
+                horizontal_position = DEFAULT_POSITION;
+                vertical_position += DIMENSION;
+            }
+
+            nodes[index] = Node::new(
+                true,
+                horizontal_position,
+                vertical_position,
+            );
+
+            horizontal_position += DIMENSION;
+        }
+    }
 
     while let Some(event) = window.next() {
 
@@ -66,7 +88,7 @@ fn main() {
 /// * `context` - graphical context from the piston window
 /// * `graphics` - 2D graphics from the piston window
 fn display_nodes(
-    nodes: &[Node; 1],
+    nodes: &[Node; 25],
     context: Context,
     graphics: &mut G2d,
 ) {

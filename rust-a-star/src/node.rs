@@ -8,6 +8,8 @@ use piston_window::{
 use graphics::rectangle::Shape;
 use graphics::context::Context;
 
+pub const DIMENSION: f64 = 50.0;
+
 pub struct Node {
     surface: Rectangle,
     horizontal_position: f64,
@@ -58,14 +60,12 @@ impl Node {
         graphics: &mut G2d,
     ) {
 
-        const WIDTH: f64 = 50.0;
-        const HEIGHT: f64 = 50.0;
         self.surface.draw(
             [
                 self.horizontal_position,
                 self.vertical_position,
-                WIDTH,
-                HEIGHT,
+                DIMENSION,
+                DIMENSION,
             ],
             &context.draw_state,
             context.transform,
