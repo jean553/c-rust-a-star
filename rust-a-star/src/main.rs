@@ -10,6 +10,7 @@ use piston_window::{
     PistonWindow,
     WindowSettings,
     clear,
+    MouseCursorEvent,
 };
 
 use graphics::context::Context;
@@ -62,6 +63,8 @@ fn main() {
         }
     }
 
+    let mut index: usize = 0;
+
     while let Some(event) = window.next() {
 
         window.draw_2d(
@@ -77,6 +80,21 @@ fn main() {
                 clear_screen(graphics);
             }
         );
+
+        if let Some(position) = event.mouse_cursor_args() {
+
+            let mut horizontal_position: f64 = 0.0;
+            while horizontal_position < position[0] {
+                horizontal_position += DIMENSION;
+                index += 1;
+            }
+
+            let mut vertical_position: f64 = 0.0;
+            while vertical_position < position[1] {
+                vertical_position += DIMENSION;
+                index += 5;
+            }
+        }
     }
 }
 
