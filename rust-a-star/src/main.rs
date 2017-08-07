@@ -57,7 +57,6 @@ fn main() {
             }
 
             nodes[index] = Node::new(
-                true,
                 horizontal_position,
                 vertical_position,
             );
@@ -125,6 +124,14 @@ fn display_nodes(
 ) {
 
     for node in nodes {
+
+        /* graphics::rectangle::Rectangle::color() does nothing,
+           so that's why I do not simply update the color
+           but use a boolean instead */
+        if !node.is_wall() {
+            continue;
+        }
+
         node.display(
             context,
             graphics,
