@@ -6,9 +6,13 @@ extern crate graphics;
 mod node;
 
 use piston_window::{
+    G2d,
     PistonWindow,
     WindowSettings,
+    clear,
 };
+
+use graphics::context::Context;
 
 use node::Node;
 

@@ -1,10 +1,13 @@
 //! The module that handles the nodes.
 
-use piston_window::Rectangle;
+use piston_window::{
+    Rectangle,
+    G2d,
+};
 
-use graphics::rectangle;
+use graphics::rectangle::Shape;
+use graphics::context::Context;
 
-/* TODO: some fields are unused */
 pub struct Node {
     surface: Rectangle,
     horizontal_position: f64,
