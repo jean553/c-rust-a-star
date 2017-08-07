@@ -1,11 +1,13 @@
 //! The module that handles the nodes.
 
 use piston_window::{
-    Rectangle,
     G2d,
 };
 
-use graphics::rectangle::Shape;
+use graphics::rectangle::{
+    Shape,
+    Rectangle,
+};
 use graphics::context::Context;
 
 pub const DIMENSION: f64 = 50.0;
@@ -27,24 +29,17 @@ impl Node {
     /// * `horizontal_position` - the horizontal position of the cell
     /// * `vertical_position` - the vertical position of the cell
     pub fn new(
-        wall: bool,
         horizontal_position: f64,
         vertical_position: f64,
     ) -> Node {
 
-        let mut color = [0.0, 0.0, 0.3, 1.0]; /* blue */
-
-        if !wall {
-            color = [1.0, 1.0, 1.0, 1.0]; /* white */
-        }
-
         Node {
             surface: Rectangle {
-                color: color,
+                color: [0.0, 0.0, 0.3, 1.0], /* blue */
                 shape: Shape::Square,
                 border: None,
             },
-            wall: wall,
+            wall: false,
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
         }
@@ -77,11 +72,15 @@ impl Node {
 
     /// Switches the selected node from wall to empty and empty to wall
     pub fn switch(&mut self) {
-
         self.wall = !self.wall;
+    }
 
-        /* FIXME: needs to check why this does not work at all */
-        self.surface.color([1.0, 1.0, 1.0, 0.0]);
+    /// Indicates if the node is a wall or not
+    ///
+    /// # Returns:
+    ///
+    /// boolean indicating if the node is a wall
+    pub fn is_wall(&self) -> bool {
+        self.wall
     }
 }
-
