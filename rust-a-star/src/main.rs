@@ -3,13 +3,14 @@
 extern crate piston_window;
 extern crate graphics;
 
+mod node;
+
 use piston_window::{
     PistonWindow,
     WindowSettings,
-    Rectangle,
 };
 
-use graphics::rectangle;
+use node::Node;
 
 fn main() {
 
@@ -26,13 +27,13 @@ fn main() {
     .build()
     .unwrap();
 
-    const NODES_AMOUNT_ON_MAP: usize = 25;
+    /* TODO: add 25 nodes ( 5 x 5 ) */
     let nodes = [
-        Rectangle {
-            color: [0.0, 0.0, 0.3, 1.0], /* blue */
-            shape: rectangle::Shape::Square,
-            border: None,
-        }; NODES_AMOUNT_ON_MAP
+        Node::new(
+            true,
+            0.0,
+            0.0,
+        )
     ];
 
     while let Some(event) = window.next() {
