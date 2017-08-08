@@ -119,27 +119,26 @@ fn main() {
 
         if let Some(button) = event.press_args() {
 
-            let mut index = get_index_from_positions(
+            let index = get_index_from_positions(
                 mouse_final_horizontal_position,
                 mouse_final_vertical_position,
             );
 
             if button == Button::Mouse(MouseButton::Left) {
-                nodes[index].switch();
+                nodes[index as usize].switch();
             }
             else if button == Button::Mouse(MouseButton::Right) {
 
                 let mut sprite = Sprite::from_texture(pin_surface.clone());
 
-                const PIN_OFFSET: f64 = 25.0;
-                let pin_final_horizontal_position: f64 =
-                    final_horizontal_position - PIN_OFFSET;
-                let pin_final_vertical_position: f64 =
-                    final_vertical_position - PIN_OFFSET;
+                let (
+                    horizontal_position,
+                    vertical_position
+                ) = get_positions_from_index(index);
 
                 sprite.set_position(
-                    pin_final_horizontal_position,
-                    pin_final_vertical_position,
+                    horizontal_position,
+                    vertical_position,
                 );
 
                 scene.add_child(sprite);
@@ -204,9 +203,9 @@ fn clear_screen(graphics: &mut G2d) {
 fn get_index_from_positions(
     horizontal_position: f64,
     vertical_position: f64,
-) -> usize {
+) -> u8 {
 
-    let index: usize = 0;
+    let mut index: u8 = 0;
 
     let mut final_horizontal_position: f64 = 50.0;
     while final_horizontal_position < horizontal_position {
@@ -221,4 +220,24 @@ fn get_index_from_positions(
     }
 
     index
+}
+
+/// Returns the positions from the index.
+///
+/// # Arguments:
+///
+/// * `index` - the given index into the grid
+///
+/// # Returns:
+///
+/// tuple with the horizontal position and the vertical position
+fn get_positions_from_index(index: u8) -> (f64, f64) {
+
+    const NODE_WIDTH: f64 = 50.0;
+    const NODE_OFFSET: f64 = 25.0;
+    const NODES_PER_LINE: u8 = 5;
+    return (
+        (index % NODES_PER_LINE) as f64 * NODE_WIDTH + NODE_OFFSET,
+        (index / NODES_PER_LINE) as f64 * NODE_WIDTH + NODE_OFFSET,
+    );
 }
