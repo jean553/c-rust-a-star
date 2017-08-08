@@ -134,12 +134,17 @@ fn main() {
             if button == Button::Mouse(MouseButton::Left) {
                 nodes[index].switch();
             }
-        }
+            else if button == Button::Mouse(MouseButton::Right) {
 
-        if let Some(button) = event.press_args() {
+                let mut sprite = Sprite::from_texture(pin_surface.clone());
 
-            if button == Button::Mouse(MouseButton::Right) {
-                /* TODO: should switch the pin visibility on the map */
+                /* TODO: arbitrary position for now */
+                sprite.set_position(
+                    20.0,
+                    20.0,
+                );
+
+                scene.add_child(sprite);
             }
         }
     }
