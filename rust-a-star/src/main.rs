@@ -28,6 +28,8 @@ use node::{
     Node,
 };
 
+use display::Display;
+
 fn main() {
 
     const WINDOW_WIDTH: u32 = 250;
