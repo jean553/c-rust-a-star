@@ -58,24 +58,24 @@ fn main() {
 
     {
         const DEFAULT_POSITION: f64 = 0.0;
-        let mut horizontal_position: f64 = DEFAULT_POSITION;
-        let mut vertical_position: f64 = DEFAULT_POSITION;
+        let mut final_horizontal_position: f64 = DEFAULT_POSITION;
+        let mut final_vertical_position: f64 = DEFAULT_POSITION;
 
         for index in 0..NODES_AMOUNT {
 
             const NODES_PER_ROW: usize = 5;
             if index % NODES_PER_ROW == 0 && index != 0 {
-                horizontal_position = DEFAULT_POSITION;
-                vertical_position += DIMENSION;
+                final_horizontal_position = DEFAULT_POSITION;
+                final_vertical_position += DIMENSION;
             }
 
             nodes[index] = Node::new(
-                horizontal_position,
-                vertical_position,
+                final_horizontal_position,
+                final_vertical_position,
             );
 
 
-            horizontal_position += DIMENSION;
+            final_horizontal_position += DIMENSION;
         }
     }
 
@@ -88,8 +88,8 @@ fn main() {
 
     let mut scene: Scene<_> = Scene::new();
 
-    let mut mouse_horizontal_position: f64 = 0.0;
-    let mut mouse_vertical_position: f64 = 0.0;
+    let mut mouse_final_horizontal_position: f64 = 0.0;
+    let mut mouse_final_vertical_position: f64 = 0.0;
 
     while let Some(event) = window.next() {
 
@@ -113,25 +113,16 @@ fn main() {
         );
 
         if let Some(position) = event.mouse_cursor_args() {
-            mouse_horizontal_position = position[0];
-            mouse_vertical_position = position[1];
+            mouse_final_horizontal_position = position[0];
+            mouse_final_vertical_position = position[1];
         }
 
         if let Some(button) = event.press_args() {
 
-            let mut index = 0;
-
-            let mut horizontal_position: f64 = 50.0;
-            while horizontal_position < mouse_horizontal_position {
-                horizontal_position += DIMENSION;
-                index += 1;
-            }
-
-            let mut vertical_position: f64 = 50.0;
-            while vertical_position < mouse_vertical_position {
-                vertical_position += DIMENSION;
-                index += 5;
-            }
+            let mut index = get_index_from_positions(
+                mouse_final_horizontal_position,
+                mouse_final_vertical_position,
+            );
 
             if button == Button::Mouse(MouseButton::Left) {
                 nodes[index].switch();
@@ -141,14 +132,14 @@ fn main() {
                 let mut sprite = Sprite::from_texture(pin_surface.clone());
 
                 const PIN_OFFSET: f64 = 25.0;
-                let pin_horizontal_position: f64 =
-                    horizontal_position - PIN_OFFSET;
-                let pin_vertical_position: f64 =
-                    vertical_position - PIN_OFFSET;
+                let pin_final_horizontal_position: f64 =
+                    final_horizontal_position - PIN_OFFSET;
+                let pin_final_vertical_position: f64 =
+                    final_vertical_position - PIN_OFFSET;
 
                 sprite.set_position(
-                    pin_horizontal_position,
-                    pin_vertical_position,
+                    pin_final_horizontal_position,
+                    pin_final_vertical_position,
                 );
 
                 scene.add_child(sprite);
@@ -198,4 +189,36 @@ fn clear_screen(graphics: &mut G2d) {
         BLACK_COLOR,
         graphics,
     );
+}
+
+/// Returns the index of the given position (horizontal and vertical).
+///
+/// # Arguments:
+///
+/// * `horizontal_position` - the horizontal position
+/// * `vertical_position` - the vertical position
+///
+/// # Returns:
+///
+/// the index of the given position
+fn get_index_from_positions(
+    horizontal_position: f64,
+    vertical_position: f64,
+) -> usize {
+
+    let index: usize = 0;
+
+    let mut final_horizontal_position: f64 = 50.0;
+    while final_horizontal_position < horizontal_position {
+        final_horizontal_position += DIMENSION;
+        index += 1;
+    }
+
+    let mut final_vertical_position: f64 = 50.0;
+    while final_vertical_position < vertical_position {
+        final_vertical_position += DIMENSION;
+        index += 5;
+    }
+
+    index
 }
