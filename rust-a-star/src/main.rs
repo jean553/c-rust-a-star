@@ -3,7 +3,6 @@
 extern crate piston_window;
 extern crate graphics;
 extern crate sprite;
-extern crate gfx_device_gl;
 
 use std::mem;
 use std::rc::Rc;
@@ -80,8 +79,6 @@ fn main() {
         }
     }
 
-    let mut index: usize = 0;
-
     let pin_surface = Rc::new(Texture::from_path(
         &mut window.factory,
         "res/pin.png",
@@ -90,6 +87,9 @@ fn main() {
     ).unwrap());
 
     let mut scene: Scene<_> = Scene::new();
+
+    let mut mouse_horizontal_position: f64 = 0.0;
+    let mut mouse_vertical_position: f64 = 0.0;
 
     while let Some(event) = window.next() {
 
@@ -113,23 +113,25 @@ fn main() {
         );
 
         if let Some(position) = event.mouse_cursor_args() {
+            mouse_horizontal_position = position[0];
+            mouse_vertical_position = position[1];
+        }
 
-            index = 0;
+        if let Some(button) = event.press_args() {
+
+            let mut index = 0;
 
             let mut horizontal_position: f64 = 50.0;
-            while horizontal_position < position[0] {
+            while horizontal_position < mouse_horizontal_position {
                 horizontal_position += DIMENSION;
                 index += 1;
             }
 
             let mut vertical_position: f64 = 50.0;
-            while vertical_position < position[1] {
+            while vertical_position < mouse_vertical_position {
                 vertical_position += DIMENSION;
                 index += 5;
             }
-        }
-
-        if let Some(button) = event.press_args() {
 
             if button == Button::Mouse(MouseButton::Left) {
                 nodes[index].switch();
@@ -138,10 +140,15 @@ fn main() {
 
                 let mut sprite = Sprite::from_texture(pin_surface.clone());
 
-                /* TODO: arbitrary position for now */
+                const PIN_OFFSET: f64 = 25.0;
+                let pin_horizontal_position: f64 =
+                    horizontal_position - PIN_OFFSET;
+                let pin_vertical_position: f64 =
+                    vertical_position - PIN_OFFSET;
+
                 sprite.set_position(
-                    20.0,
-                    20.0,
+                    pin_horizontal_position,
+                    pin_vertical_position,
                 );
 
                 scene.add_child(sprite);
