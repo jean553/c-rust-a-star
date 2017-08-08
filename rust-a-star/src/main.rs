@@ -2,6 +2,7 @@
 
 extern crate piston_window;
 extern crate graphics;
+extern crate sprite;
 extern crate gfx_device_gl;
 
 use std::mem;
@@ -21,10 +22,14 @@ use piston_window::{
     Flip,
 };
 
+use sprite::{
+    Scene,
+    Sprite,
+};
+
 use graphics::context::Context;
 
 mod node;
-mod pin;
 mod display;
 
 use node::{
