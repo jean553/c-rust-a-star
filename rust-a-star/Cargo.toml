@@ -4,5 +4,6 @@ version = "0.1.0"
 authors = ["Jean LELIEVRE <Jean.LELIEVRE@supinfo.com>"]
 
 [dependencies]
+gfx_device_gl = "0.14.1"
 piston_window = "0.68.0"
 piston2d-graphics = "0.21.1"

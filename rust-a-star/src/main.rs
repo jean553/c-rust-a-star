@@ -2,6 +2,7 @@
 
 extern crate piston_window;
 extern crate graphics;
+extern crate gfx_device_gl;
 
 use std::mem;
 
