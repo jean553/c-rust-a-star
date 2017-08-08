@@ -89,11 +89,15 @@ fn main() {
         &TextureSettings::new(),
     ).unwrap());
 
+    let mut scene: Scene<_> = Scene::new();
+
     while let Some(event) = window.next() {
 
         window.draw_2d(
             &event,
             |context, graphics| {
+
+                clear_screen(graphics);
 
                 display_nodes(
                     &nodes,
@@ -101,7 +105,10 @@ fn main() {
                     graphics,
                 );
 
-                clear_screen(graphics);
+                scene.draw(
+                    context.transform,
+                    graphics,
+                );
             }
         );
 
