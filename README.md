@@ -37,3 +37,7 @@ On your host:
 ```bash
 cargo rustdoc -- --no-defaults
 ```
+
+## Credits
+
+* https://www.iconfinder.com/icons/2252378/pin_pin_it_pinterest_tag_icon - Pin by Vectto (https://creativecommons.org/licenses/by/3.0/)
