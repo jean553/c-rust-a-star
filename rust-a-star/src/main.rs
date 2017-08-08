@@ -21,6 +21,7 @@ use graphics::context::Context;
 
 mod node;
 mod pin;
+mod display;
 
 use node::{
     DIMENSION,
