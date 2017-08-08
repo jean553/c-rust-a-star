@@ -29,14 +29,11 @@ use sprite::{
 use graphics::context::Context;
 
 mod node;
-mod display;
 
 use node::{
     DIMENSION,
     Node,
 };
-
-use display::Display;
 
 fn main() {
 
