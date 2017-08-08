@@ -15,6 +15,7 @@ pub const DIMENSION: f64 = 50.0;
 pub struct Node {
     surface: Rectangle,
     wall: bool,
+    pin: bool,
     horizontal_position: f64,
     vertical_position: f64,
 }
@@ -40,6 +41,7 @@ impl Node {
                 border: None,
             },
             wall: false,
+            pin: false,
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
         }
