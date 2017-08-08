@@ -1,0 +1,9 @@
+language: rust
+rust:
+    - nightly
+
+before_script:
+    - cd rust-a-star/ 
+
+script:
+    - cargo build
