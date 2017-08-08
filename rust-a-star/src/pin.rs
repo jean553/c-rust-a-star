@@ -5,14 +5,37 @@ use piston_window::{
     Texture,
     TextureSettings,
     Flip,
+    G2d,
 };
 
+use graphics::context::Context;
+
 use gfx_device_gl::Resources;
+
+use display::Display;
 
 pub struct Pin {
     texture: Texture<Resources>,
     horizontal_position: f64,
     vertical_position: f64,
+}
+
+impl Display for Pin {
+
+    /// Displays the pin.
+    ///
+    /// # Arguments:
+    ///
+    /// * `context` - the context of the piston window
+    /// * `graphics` - 2D graphics from the piston window
+    ///
+    /// TODO: to define
+    fn display(
+        &self,
+        context: Context,
+        graphics: &mut G2d,
+    ) {
+    }
 }
 
 impl Pin {
