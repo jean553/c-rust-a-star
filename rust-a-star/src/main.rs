@@ -107,6 +107,13 @@ fn main() {
                 nodes[index].switch();
             }
         }
+
+        if let Some(button) = event.press_args() {
+
+            if button == Button::Mouse(MouseButton::Right) {
+                /* TODO: should switch the pin visibility on the map */
+            }
+        }
     }
 }
 
