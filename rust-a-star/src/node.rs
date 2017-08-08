@@ -1,14 +1,14 @@
 //! The module that handles the nodes.
 
-use piston_window::{
-    G2d,
-};
+use piston_window::G2d;
 
 use graphics::rectangle::{
     Shape,
     Rectangle,
 };
 use graphics::context::Context;
+
+use display::Display;
 
 pub const DIMENSION: f64 = 50.0;
 
@@ -18,6 +18,34 @@ pub struct Node {
     pin: bool,
     horizontal_position: f64,
     vertical_position: f64,
+}
+
+impl Display for Node {
+
+    /// Displays the node.
+    ///
+    /// # Arguments:
+    ///
+    /// * `context` - the context of the piston window
+    /// * `graphics` - 2D graphics from the piston window
+    fn display(
+        &self,
+        context: Context,
+        graphics: &mut G2d,
+    ) {
+
+        self.surface.draw(
+            [
+                self.horizontal_position,
+                self.vertical_position,
+                DIMENSION,
+                DIMENSION,
+            ],
+            &context.draw_state,
+            context.transform,
+            graphics,
+        );
+    }
 }
 
 impl Node {
@@ -45,31 +73,6 @@ impl Node {
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
         }
-    }
-
-    /// Displays the node.
-    ///
-    /// # Arguments:
-    ///
-    /// * `context` - the context of the piston window
-    /// * `graphics` - 2D graphics from the piston window
-    pub fn display(
-        &self,
-        context: Context,
-        graphics: &mut G2d,
-    ) {
-
-        self.surface.draw(
-            [
-                self.horizontal_position,
-                self.vertical_position,
-                DIMENSION,
-                DIMENSION,
-            ],
-            &context.draw_state,
-            context.transform,
-            graphics,
-        );
     }
 
     /// Switches the selected node from wall to empty and empty to wall
