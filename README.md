@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jean553/rust-a-star.svg?branch=master)](https://travis-ci.org/jean553/rust-a-star)
+
 # Rust A*
 
 Attempt to implement the A-star algorithm in Rust with graphical resolution.
