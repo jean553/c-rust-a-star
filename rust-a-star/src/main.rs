@@ -20,6 +20,7 @@ use piston_window::{
 use graphics::context::Context;
 
 mod node;
+mod pin;
 
 use node::{
     DIMENSION,
