@@ -5,6 +5,7 @@ extern crate graphics;
 extern crate gfx_device_gl;
 
 use std::mem;
+use std::rc::Rc;
 
 use piston_window::{
     G2d,
@@ -15,6 +16,9 @@ use piston_window::{
     MouseButton,
     PressEvent,
     Button,
+    Texture,
+    TextureSettings,
+    Flip,
 };
 
 use graphics::context::Context;
@@ -72,6 +76,13 @@ fn main() {
     }
 
     let mut index: usize = 0;
+
+    let pin_surface = Rc::new(Texture::from_path(
+        &mut window.factory,
+        "res/pin.png",
+        Flip::None,
+        &TextureSettings::new(),
+    ).unwrap());
 
     while let Some(event) = window.next() {
 
