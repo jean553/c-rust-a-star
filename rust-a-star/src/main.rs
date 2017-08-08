@@ -2,6 +2,7 @@
 
 extern crate piston_window;
 extern crate graphics;
+extern crate sprite;
 extern crate gfx_device_gl;
 
 use std::mem;
@@ -21,10 +22,14 @@ use piston_window::{
     Flip,
 };
 
+use sprite::{
+    Scene,
+    Sprite,
+};
+
 use graphics::context::Context;
 
 mod node;
-mod pin;
 mod display;
 
 use node::{
@@ -84,11 +89,15 @@ fn main() {
         &TextureSettings::new(),
     ).unwrap());
 
+    let mut scene: Scene<_> = Scene::new();
+
     while let Some(event) = window.next() {
 
         window.draw_2d(
             &event,
             |context, graphics| {
+
+                clear_screen(graphics);
 
                 display_nodes(
                     &nodes,
@@ -96,7 +105,10 @@ fn main() {
                     graphics,
                 );
 
-                clear_screen(graphics);
+                scene.draw(
+                    context.transform,
+                    graphics,
+                );
             }
         );
 
@@ -122,12 +134,17 @@ fn main() {
             if button == Button::Mouse(MouseButton::Left) {
                 nodes[index].switch();
             }
-        }
+            else if button == Button::Mouse(MouseButton::Right) {
 
-        if let Some(button) = event.press_args() {
+                let mut sprite = Sprite::from_texture(pin_surface.clone());
 
-            if button == Button::Mouse(MouseButton::Right) {
-                /* TODO: should switch the pin visibility on the map */
+                /* TODO: arbitrary position for now */
+                sprite.set_position(
+                    20.0,
+                    20.0,
+                );
+
+                scene.add_child(sprite);
             }
         }
     }
