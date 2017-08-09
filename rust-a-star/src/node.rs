@@ -87,4 +87,16 @@ impl Node {
     pub fn is_wall(&self) -> bool {
         self.wall
     }
+
+    /// Setter for the node heuristic.
+    ///
+    /// # Arguments:
+    ///
+    /// * `heuristic` - the expected heuristic to set
+    pub fn set_heuristic(
+        &mut self,
+        heuristic: u8,
+    ) {
+        self.heuristic = heuristic;
+    }
 }
