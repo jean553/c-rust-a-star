@@ -88,6 +88,8 @@ fn main() {
     let mut mouse_final_horizontal_position: f64 = 0.0;
     let mut mouse_final_vertical_position: f64 = 0.0;
 
+    let mut pins_amount: u8 = 0;
+
     while let Some(event) = window.next() {
 
         window.draw_2d(
@@ -139,6 +141,16 @@ fn main() {
                 );
 
                 scene.add_child(sprite);
+
+                pins_amount += 1;
+
+                if pins_amount == 2 {
+
+                    generate_heuristics(
+                        &mut nodes,
+                        index,
+                    );
+                }
             }
         }
     }
