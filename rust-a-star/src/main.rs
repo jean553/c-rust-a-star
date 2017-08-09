@@ -88,6 +88,8 @@ fn main() {
     let mut mouse_final_horizontal_position: f64 = 0.0;
     let mut mouse_final_vertical_position: f64 = 0.0;
 
+    let mut pins_amount: u8 = 0;
+
     while let Some(event) = window.next() {
 
         window.draw_2d(
@@ -139,6 +141,16 @@ fn main() {
                 );
 
                 scene.add_child(sprite);
+
+                pins_amount += 1;
+
+                if pins_amount == 2 {
+
+                    generate_heuristics(
+                        &mut nodes,
+                        index,
+                    );
+                }
             }
         }
     }
@@ -237,4 +249,34 @@ fn get_positions_from_index(index: u8) -> (f64, f64) {
         (index % NODES_PER_LINE) as f64 * NODE_WIDTH + NODE_OFFSET,
         (index / NODES_PER_LINE) as f64 * NODE_WIDTH + NODE_OFFSET,
     );
+}
+
+/// Generates the heuristics for all the nodes
+/// using an euclidean distance.
+///
+/// # Arguments:
+///
+/// * `nodes` - all the nodes
+/// * `index` - the index used for distances calculation
+fn generate_heuristics(
+    nodes: &mut[Node; 25],
+    index: u8,
+) {
+    const NODES_PER_LINE: u8 = 5;
+    let index_x = (index % NODES_PER_LINE) as i8;
+    let index_y = (index / NODES_PER_LINE) as i8;
+
+    for (counter, node) in nodes.iter_mut().enumerate() {
+
+        let node_x = (counter as u8 % NODES_PER_LINE) as i8;
+        let node_y = (counter as u8 / NODES_PER_LINE) as i8;
+
+        /* rounded at the integer level */
+        let heuristic = (
+            ((index_x - node_x) as f32).powi(2) +
+            ((index_y - node_y) as f32).powi(2)
+        ).sqrt() as u8;
+
+        (*node).set_heuristic(heuristic);
+    }
 }
