@@ -16,6 +16,7 @@ pub struct Node {
     pin: bool,
     horizontal_position: f64,
     vertical_position: f64,
+    heuristic: u8,
 }
 
 impl Node {
@@ -42,6 +43,7 @@ impl Node {
             pin: false,
             horizontal_position: horizontal_position,
             vertical_position: vertical_position,
+            heuristic: 0,
         }
     }
 
