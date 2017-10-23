@@ -16,12 +16,20 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    int width = atoi(argv[1]);
+    int height = atoi(argv[2]);
+
+    if (width > MAX_WIDTH_OR_HEIGHT || height > MAX_WIDTH_OR_HEIGHT) {
+        printf("The width or the height cannot exceed 100.");
+        return 1;
+    }
+
     SDL_Window* window = SDL_CreateWindow(
         "C-Rust A* example",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        640,
-        480,
+        width * NODE_DIMENSION,
+        height * NODE_DIMENSION,
         SDL_WINDOW_OPENGL
     );
 
