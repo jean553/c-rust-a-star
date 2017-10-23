@@ -1,0 +1,3 @@
+[submodule "a-star-rs"]
+	path = a-star-rs
+	url = git://github.com/jean553/a-star-rs
