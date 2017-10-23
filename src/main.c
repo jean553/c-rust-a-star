@@ -3,6 +3,9 @@
 
 #include <SDL2/SDL.h>
 
+#define NODE_DIMENSION 50
+#define MAX_WIDTH_OR_HEIGHT 100
+
 /**
  *
  */
