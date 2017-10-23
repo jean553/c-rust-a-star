@@ -8,6 +8,11 @@
  */
 int main(int argc, char* argv[]) {
 
+    if (argc != 5) {
+        printf("Unexpected parameters amount.");
+        return 1;
+    }
+
     SDL_Window* window = SDL_CreateWindow(
         "C-Rust A* example",
         SDL_WINDOWPOS_CENTERED,
