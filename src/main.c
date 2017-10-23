@@ -45,8 +45,16 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    SDL_FillRect(
+        screen,
+        NULL,
+        SDL_MapRGB(screen->format, 0, 0, 0)
+    );
+
     SDL_Event event;
     unsigned short run = 1;
+
+    SDL_UpdateWindowSurface(window);
 
     while(run) {
 
