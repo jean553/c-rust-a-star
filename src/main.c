@@ -38,6 +38,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    SDL_Surface* screen = SDL_GetWindowSurface(window);
+
+    if (screen == NULL) {
+        printf("The screen cannot be created.");
+        return 1;
+    }
+
     SDL_Event event;
     unsigned short run = 1;
 
