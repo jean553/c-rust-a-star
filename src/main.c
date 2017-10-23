@@ -16,11 +16,11 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    int width = atoi(argv[1]);
-    int height = atoi(argv[2]);
+    unsigned int width = atoi(argv[1]);
+    unsigned int height = atoi(argv[2]);
 
     if (width > MAX_WIDTH_OR_HEIGHT || height > MAX_WIDTH_OR_HEIGHT) {
-        printf("The width or the height cannot exceed 100.");
+        printf("The width or the height must be between 0 and 100.");
         return 1;
     }
 
