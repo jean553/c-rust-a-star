@@ -1,9 +1,8 @@
-language: rust
-rust:
-    - nightly
+language: c
+compiler: gcc
 
 before_script:
-    - cd rust-a-star/ 
+    - cd c-rust-a-star/ 
 
 script:
-    - cargo build
+    - make
