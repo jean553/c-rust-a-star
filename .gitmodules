@@ -1,3 +1,0 @@
-[submodule "libs/a-star-rs"]
-	path = libs/a-star-rs
-	url = git@github.com:jean553/c-rust-a-star.git
