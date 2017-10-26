@@ -2,7 +2,16 @@
 
 A graphical C program showing `A*` paths resolution using a Rust library.
 
+## Requirements
+
+The following tools are required:
+ * cargo (Rust nightly),
+ * gcc
+
 ## Compile
+
+The following command compiles both
+of the C program and the Rust library.
 
 ```bash
 make
