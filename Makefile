@@ -9,3 +9,7 @@ c_rust_a_star:
 
 a_star_rs:
 	cargo build --manifest-path libs/a-star-rs/a-star-rs/Cargo.toml
+
+clean:
+	rm -rf libs/a-star-rs/a-star-rs/target
+	rm c_rust_a_star
