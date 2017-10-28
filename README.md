@@ -8,6 +8,13 @@ The following tools are required:
  * cargo (Rust nightly),
  * gcc
 
+## Install sub-module (Rust A-Star library)
+
+```bash
+git submodule init
+git submodule update
+```
+
 ## Compile
 
 The following command compiles both
