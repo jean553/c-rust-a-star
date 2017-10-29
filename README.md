@@ -2,6 +2,11 @@
 
 A graphical C program showing `A*` paths resolution using a Rust library.
 
+The used Rust library has been developed for the project
+and can be found here: https://github.com/jean553/a-star-rs.
+
+![Image 1](screenshot.png)
+
 ## Requirements
 
 The following tools are required:
