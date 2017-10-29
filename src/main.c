@@ -9,6 +9,7 @@
 #define MAX_WIDTH_OR_HEIGHT 10
 #define PATH_MAX_LENGTH 100
 #define PATH_DEFAULT_VALUE 150
+#define WALLS_INDICES_LIST_INPUT_INDEX 5
 
 #define GREEN_COLOR_RED_AMOUNT 0
 #define GREEN_COLOR_GREEN_AMOUNT 255
@@ -21,6 +22,10 @@
 #define BLUE_COLOR_RED_AMOUNT 0
 #define BLUE_COLOR_GREEN_AMOUNT 0
 #define BLUE_COLOR_BLUE_AMOUNT 255
+
+#define GREY_COLOR_RED_AMOUNT 192
+#define GREY_COLOR_GREEN_AMOUNT 192
+#define GREY_COLOR_BLUE_AMOUNT 192
 
 #define COLORS_OPACITY 255
 
@@ -47,7 +52,7 @@ extern struct Positions get_positions(
  */
 int main(int argc, char* argv[]) {
 
-    if (argc != 5) {
+    if (argc < WALLS_INDICES_LIST_INPUT_INDEX) {
         printf("Unexpected parameters amount.");
         return 1;
     }
@@ -56,6 +61,13 @@ int main(int argc, char* argv[]) {
     unsigned int height = atoi(argv[2]);
     unsigned int departure = atoi(argv[3]);
     unsigned int arrival = atoi(argv[4]);
+
+    unsigned int walls_amount = argc - WALLS_INDICES_LIST_INPUT_INDEX;
+    uint8_t* walls_indices = malloc(sizeof(uint8_t) * walls_amount);
+
+    for (int i = 0; i < walls_amount; i += 1) {
+        walls_indices[i] = atoi(argv[WALLS_INDICES_LIST_INPUT_INDEX + i]);
+    }
 
     if (width > MAX_WIDTH_OR_HEIGHT || height > MAX_WIDTH_OR_HEIGHT) {
         printf("The width or the height must be between 0 and 10.");
@@ -190,6 +202,35 @@ int main(int argc, char* argv[]) {
         SDL_RenderFillRect(
             renderer,
             &path_nodes[i]
+        );
+    }
+
+    SDL_SetRenderDrawColor(
+        renderer,
+        GREY_COLOR_RED_AMOUNT,
+        GREY_COLOR_GREEN_AMOUNT,
+        GREY_COLOR_BLUE_AMOUNT,
+        COLORS_OPACITY
+    );
+
+    SDL_Rect* walls = malloc(sizeof(SDL_Rect) * walls_amount);
+    Positions* walls_positions = malloc(sizeof(Positions) * walls_amount);
+
+    for (int i = 0; i < walls_amount; i += 1) {
+
+        walls_positions[i] = get_positions(
+            width,
+            walls_indices[i]
+        );
+
+        walls[i].x = walls_positions[i].horizontal * NODE_DIMENSION;
+        walls[i].y = walls_positions[i].vertical * NODE_DIMENSION;
+        walls[i].w = NODE_DIMENSION;
+        walls[i].h = NODE_DIMENSION;
+
+        SDL_RenderFillRect(
+            renderer,
+            &walls[i]
         );
     }
 

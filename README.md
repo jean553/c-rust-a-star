@@ -27,7 +27,7 @@ make
 ## Run
 
 ```sh
-./c_rust_a_star 10 10 5 6
+./c_rust_a_star 10 10 5 6 12 8
 ```
 
 The options are (in order):
@@ -35,6 +35,7 @@ The options are (in order):
  * map height (in nodes),
  * departure node index,
  * arrival node index
+ * walls indices list (optional, here 12 and 8)
 
 ## Remove previous compilation data
 
