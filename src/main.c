@@ -15,12 +15,22 @@
 
 #define COLORS_OPACITY 255
 
+struct Positions {
+    uint8_t horizontal;
+    uint8_t vertical;
+};
+
 extern void get_path(
     uint8_t* path,
     uint8_t width,
     uint8_t height,
     uint8_t departure,
     uint8_t arrival
+);
+
+extern struct Positions get_positions(
+    uint8_t width,
+    uint8_t index
 );
 
 /**
@@ -82,9 +92,13 @@ int main(int argc, char* argv[]) {
 
     SDL_Rect departure_rectangle;
 
-    // TODO: #42 the departure node position depends of the departure index
-    departure_rectangle.x = 0;
-    departure_rectangle.y = 0;
+    struct Positions departure_position = get_positions(
+        width,
+        departure
+    );
+
+    departure_rectangle.x = departure_position.horizontal * NODE_DIMENSION;
+    departure_rectangle.y = departure_position.vertical * NODE_DIMENSION;
     departure_rectangle.w = NODE_DIMENSION;
     departure_rectangle.h = NODE_DIMENSION;
 
