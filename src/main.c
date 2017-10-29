@@ -62,7 +62,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    uint8_t path[PATH_MAX_LENGTH] = {0};
+    uint8_t path[PATH_MAX_LENGTH];
+    for (int i = 0; i < PATH_MAX_LENGTH; i += 1) {
+        path[i] = PATH_DEFAULT_VALUE;
+    }
 
     get_path(
         path,
