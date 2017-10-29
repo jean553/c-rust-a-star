@@ -3,9 +3,17 @@
 
 #include <SDL2/SDL.h>
 
+#define RENDERING_DRIVER_INDEX -1
+
 #define NODE_DIMENSION 50
 #define MAX_WIDTH_OR_HEIGHT 10
 #define PATH_MAX_LENGTH 100
+
+#define GREEN_COLOR_RED_AMOUNT 0
+#define GREEN_COLOR_GREEN_AMOUNT 255
+#define GREEN_COLOR_BLUE_AMOUNT 0
+
+#define COLORS_OPACITY 255
 
 extern void get_path(
     uint8_t* path,
