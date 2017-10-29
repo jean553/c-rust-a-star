@@ -24,10 +24,10 @@
 
 #define COLORS_OPACITY 255
 
-struct Positions {
+typedef struct Positions {
     uint8_t horizontal;
     uint8_t vertical;
-};
+} Positions;
 
 extern void get_path(
     uint8_t* path,
