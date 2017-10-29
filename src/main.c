@@ -80,12 +80,41 @@ int main(int argc, char* argv[]) {
         SDL_MapRGB(screen->format, 0, 0, 0)
     );
 
+    SDL_Rect departure_rectangle;
+
+    // TODO: #42 the departure node position depends of the departure index
+    departure_rectangle.x = 0;
+    departure_rectangle.y = 0;
+    departure_rectangle.w = NODE_DIMENSION;
+    departure_rectangle.h = NODE_DIMENSION;
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(
+        window,
+        RENDERING_DRIVER_INDEX,
+        SDL_RENDERER_ACCELERATED
+    );
+
+    SDL_SetRenderDrawColor(
+        renderer,
+        GREEN_COLOR_RED_AMOUNT,
+        GREEN_COLOR_GREEN_AMOUNT,
+        GREEN_COLOR_BLUE_AMOUNT,
+        COLORS_OPACITY
+    );
+
+    SDL_RenderFillRect(
+        renderer,
+        &departure_rectangle
+    );
+
     SDL_Event event;
     unsigned short run = 1;
 
     SDL_UpdateWindowSurface(window);
 
     while(run) {
+
+        SDL_RenderPresent(renderer);
 
         SDL_PollEvent(&event);
 
