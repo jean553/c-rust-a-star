@@ -9,6 +9,7 @@
 #define MAX_WIDTH_OR_HEIGHT 10
 #define PATH_MAX_LENGTH 100
 #define PATH_DEFAULT_VALUE 150
+#define WALLS_INDICES_LIST_INPUT_INDEX 5
 
 #define GREEN_COLOR_RED_AMOUNT 0
 #define GREEN_COLOR_GREEN_AMOUNT 255
@@ -51,7 +52,7 @@ extern struct Positions get_positions(
  */
 int main(int argc, char* argv[]) {
 
-    if (argc != 5) {
+    if (argc < WALLS_INDICES_LIST_INPUT_INDEX) {
         printf("Unexpected parameters amount.");
         return 1;
     }
@@ -60,6 +61,13 @@ int main(int argc, char* argv[]) {
     unsigned int height = atoi(argv[2]);
     unsigned int departure = atoi(argv[3]);
     unsigned int arrival = atoi(argv[4]);
+
+    unsigned int walls_amount = argc - WALLS_INDICES_LIST_INPUT_INDEX;
+    uint8_t* walls_indices = malloc(sizeof(uint8_t) * walls_amount);
+
+    for (int i = 0; i < walls_amount; i += 1) {
+        walls_indices[i] = atoi(argv[WALLS_INDICES_LIST_INPUT_INDEX + i]);
+    }
 
     if (width > MAX_WIDTH_OR_HEIGHT || height > MAX_WIDTH_OR_HEIGHT) {
         printf("The width or the height must be between 0 and 10.");
