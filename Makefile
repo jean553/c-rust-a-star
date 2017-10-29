@@ -1,6 +1,6 @@
 CC=gcc
 SOURCEDIR=src
-LIBS=-lSDL2 libs/a-star-rs/a-star-rs/target/debug/libastar.a
+LIBS=-ldl -lpthread -lSDL2 libs/a-star-rs/a-star-rs/target/debug/libastar.a
 
 all: a_star_rs c_rust_a_star
 
