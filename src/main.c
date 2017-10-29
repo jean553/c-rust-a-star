@@ -157,6 +157,42 @@ int main(int argc, char* argv[]) {
         &arrival_rectangle
     );
 
+    int current_index = 0;
+    int nodes_amount = 0;
+
+    while(path[nodes_amount] != PATH_DEFAULT_VALUE) {
+        nodes_amount += 1;
+    }
+
+    SDL_SetRenderDrawColor(
+        renderer,
+        BLUE_COLOR_RED_AMOUNT,
+        BLUE_COLOR_GREEN_AMOUNT,
+        BLUE_COLOR_BLUE_AMOUNT,
+        COLORS_OPACITY
+    );
+
+    SDL_Rect* path_nodes = malloc(sizeof(SDL_Rect) * nodes_amount);
+    Positions* nodes_positions = malloc(sizeof(Positions) * nodes_amount);
+
+    for (int i = 0; i < nodes_amount; i += 1) {
+
+        nodes_positions[i] = get_positions(
+            width,
+            path[i]
+        );
+
+        path_nodes[i].x = nodes_positions[i].horizontal * NODE_DIMENSION;
+        path_nodes[i].y = nodes_positions[i].vertical * NODE_DIMENSION;
+        path_nodes[i].w = NODE_DIMENSION;
+        path_nodes[i].h = NODE_DIMENSION;
+
+        SDL_RenderFillRect(
+            renderer,
+            &path_nodes[i]
+        );
+    }
+
     SDL_Event event;
     unsigned short run = 1;
 
