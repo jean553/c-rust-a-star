@@ -36,6 +36,8 @@ typedef struct Positions {
 
 extern void get_path(
     uint8_t* path,
+    uint8_t* walls,
+    uint8_t walls_amount,
     uint8_t width,
     uint8_t height,
     uint8_t departure,
@@ -81,6 +83,8 @@ int main(int argc, char* argv[]) {
 
     get_path(
         path,
+        walls_indices,
+        walls_amount,
         width,
         height,
         departure,
