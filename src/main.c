@@ -15,6 +15,11 @@
 
 #define COLORS_OPACITY 255
 
+struct Positions {
+    uint8_t horizontal;
+    uint8_t vertical;
+};
+
 extern void get_path(
     uint8_t* path,
     uint8_t width,
