@@ -92,9 +92,13 @@ int main(int argc, char* argv[]) {
 
     SDL_Rect departure_rectangle;
 
-    // TODO: #42 the departure node position depends of the departure index
-    departure_rectangle.x = 0;
-    departure_rectangle.y = 0;
+    struct Positions departure_position = get_positions(
+        width,
+        departure
+    );
+
+    departure_rectangle.x = departure_position.horizontal * NODE_DIMENSION;
+    departure_rectangle.y = departure_position.vertical * NODE_DIMENSION;
     departure_rectangle.w = NODE_DIMENSION;
     departure_rectangle.h = NODE_DIMENSION;
 
