@@ -28,6 +28,11 @@ extern void get_path(
     uint8_t arrival
 );
 
+extern struct Positions get_positions(
+    uint8_t width,
+    uint8_t index
+);
+
 /**
  *
  */
