@@ -205,6 +205,35 @@ int main(int argc, char* argv[]) {
         );
     }
 
+    SDL_SetRenderDrawColor(
+        renderer,
+        GREY_COLOR_RED_AMOUNT,
+        GREY_COLOR_GREEN_AMOUNT,
+        GREY_COLOR_BLUE_AMOUNT,
+        COLORS_OPACITY
+    );
+
+    SDL_Rect* walls = malloc(sizeof(SDL_Rect) * walls_amount);
+    Positions* walls_positions = malloc(sizeof(Positions) * walls_amount);
+
+    for (int i = 0; i < walls_amount; i += 1) {
+
+        walls_positions[i] = get_positions(
+            width,
+            walls_indices[i]
+        );
+
+        walls[i].x = walls_positions[i].horizontal * NODE_DIMENSION;
+        walls[i].y = walls_positions[i].vertical * NODE_DIMENSION;
+        walls[i].w = NODE_DIMENSION;
+        walls[i].h = NODE_DIMENSION;
+
+        SDL_RenderFillRect(
+            renderer,
+            &walls[i]
+        );
+    }
+
     SDL_Event event;
     unsigned short run = 1;
 
