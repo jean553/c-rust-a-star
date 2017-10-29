@@ -160,7 +160,7 @@ int main(int argc, char* argv[]) {
     int current_index = 0;
     int nodes_amount = 0;
 
-    while(path[nodes_amount] != PATH_DEFAULT_VALUE) {
+    while(path[nodes_amount] != arrival) {
         nodes_amount += 1;
     }
 
