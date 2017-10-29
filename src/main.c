@@ -13,6 +13,10 @@
 #define GREEN_COLOR_GREEN_AMOUNT 255
 #define GREEN_COLOR_BLUE_AMOUNT 0
 
+#define RED_COLOR_RED_AMOUNT 255
+#define RED_COLOR_GREEN_AMOUNT 0
+#define RED_COLOR_BLUE_AMOUNT 0
+
 #define COLORS_OPACITY 255
 
 struct Positions {
@@ -91,16 +95,27 @@ int main(int argc, char* argv[]) {
     );
 
     SDL_Rect departure_rectangle;
+    SDL_Rect arrival_rectangle;
 
     struct Positions departure_position = get_positions(
         width,
         departure
     );
 
+    struct Positions arrival_position = get_positions(
+        width,
+        arrival
+    );
+
     departure_rectangle.x = departure_position.horizontal * NODE_DIMENSION;
     departure_rectangle.y = departure_position.vertical * NODE_DIMENSION;
     departure_rectangle.w = NODE_DIMENSION;
     departure_rectangle.h = NODE_DIMENSION;
+
+    arrival_rectangle.x = arrival_position.horizontal * NODE_DIMENSION;
+    arrival_rectangle.y = arrival_position.vertical * NODE_DIMENSION;
+    arrival_rectangle.w = NODE_DIMENSION;
+    arrival_rectangle.h = NODE_DIMENSION;
 
     SDL_Renderer* renderer = SDL_CreateRenderer(
         window,
@@ -119,6 +134,19 @@ int main(int argc, char* argv[]) {
     SDL_RenderFillRect(
         renderer,
         &departure_rectangle
+    );
+
+    SDL_SetRenderDrawColor(
+        renderer,
+        RED_COLOR_RED_AMOUNT,
+        RED_COLOR_GREEN_AMOUNT,
+        RED_COLOR_BLUE_AMOUNT,
+        COLORS_OPACITY
+    );
+
+    SDL_RenderFillRect(
+        renderer,
+        &arrival_rectangle
     );
 
     SDL_Event event;
