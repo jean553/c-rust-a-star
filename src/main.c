@@ -256,6 +256,12 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    free(walls);
+    free(walls_positions);
+    free(path_nodes);
+    free(nodes_positions);
+    free(walls_indices);
+
     SDL_DestroyWindow(window);
 
     SDL_Quit();
