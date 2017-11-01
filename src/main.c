@@ -76,6 +76,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    /* TODO: #50 the path length is fixed,
+     * it should depend of the width and height */
     uint8_t path[PATH_MAX_LENGTH];
     for (int i = 0; i < PATH_MAX_LENGTH; i += 1) {
         path[i] = PATH_DEFAULT_VALUE;
